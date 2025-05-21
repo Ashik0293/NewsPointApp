@@ -16,7 +16,7 @@ protocol APIServiceProtocol {
 class APIService: APIServiceProtocol {
     private let baseURL = "https://newsapi.org/v2/top-headlines"
     private let apiKey = "5c4d841134d046c08b33ddd27ad8f7d8"
-    
+
     func fetchNews(page: Int = 1, pageSize: Int = 5, completion: @escaping (Result<[Article], Error>) -> Void) {
         var components = URLComponents(string: baseURL)
         components?.queryItems = [
@@ -30,12 +30,23 @@ class APIService: APIServiceProtocol {
             completion(.failure(APIError.invalidURL))
             return
         }
-        
-        let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
-        
-        // Remove cache for pagination (optional)
+
+        var request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
+
+        if let cachedResponse = URLCache.shared.cachedResponse(for: request) {
+            print("Using cached data")
+            let data = cachedResponse.data
+            do {
+                let decoded = try JSONDecoder().decode(NewsResponse.self, from: data)
+                completion(.success(decoded.articles))
+                return
+            } catch {
+                print("Error decoding cached data: \(error.localizedDescription)")
+            }
+        }
+
         URLCache.shared.removeCachedResponse(for: request)
-        
+
         AF.request(request)
             .responseData { response in
                 switch response.result {
@@ -46,14 +57,17 @@ class APIService: APIServiceProtocol {
                         completion(.failure(APIError.httpError(statusCode)))
                         return
                     }
-                    
+
                     do {
                         let decoded = try JSONDecoder().decode(NewsResponse.self, from: data)
+                        let cachedURLResponse = CachedURLResponse(response: response.response!, data: data)
+                        URLCache.shared.storeCachedResponse(cachedURLResponse, for: request)
+                        
                         completion(.success(decoded.articles))
                     } catch {
                         completion(.failure(APIError.noData))
                     }
-                    
+
                 case .failure(let error):
                     completion(.failure(error))
                 }
