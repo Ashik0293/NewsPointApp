@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<array/>
+	<array>
+		<string>com.NewsPoint.newsRefresh</string>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -15,8 +17,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>Item 0</key>
-	<string>com.NewsPoint.newsRefresh</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
