@@ -162,14 +162,22 @@ extension SearchViewController:UICollectionViewDataSource,UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let article = viewModel.getArticle(at: indexPath.row) {
-         currentarticle = article
-            let popUpView = PopUpViewController()
-            popUpView.appear(sender: self)
-            popUpView.configure(with: article)
-         print("Initial visible article: \(article.title ?? "Unknown")")
+        let article: Article
+
+        if isSearching {
+            article = filterarrayNews[indexPath.row]
+        } else {
+            guard let fetchedArticle = viewModel.getArticle(at: indexPath.row) else { return }
+            article = fetchedArticle
         }
+
+        currentarticle = article
+        let popUpView = PopUpViewController()
+        popUpView.appear(sender: self)
+        popUpView.configure(with: article)
+        print("Selected article: \(article.title ?? "Unknown")")
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
