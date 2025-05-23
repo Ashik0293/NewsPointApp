@@ -122,7 +122,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                                 <connections>
-                                                    <action selector="onClickTabBar:" destination="WA2-KI-qB5" eventType="touchUpInside" id="9ay-hS-AhO"/>
+                                                    <action selector="onClickTabBar:" destination="WA2-KI-qB5" eventType="touchUpInside" id="vxm-ls-YW8"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -148,7 +148,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                                 <connections>
-                                                    <action selector="onClickTabBar:" destination="WA2-KI-qB5" eventType="touchUpInside" id="AhU-a8-7ik"/>
+                                                    <action selector="onClickTabBar:" destination="WA2-KI-qB5" eventType="touchUpInside" id="fnA-Ut-D46"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -174,7 +174,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                                 <connections>
-                                                    <action selector="onClickTabBar:" destination="WA2-KI-qB5" eventType="touchUpInside" id="6A2-a9-XiK"/>
+                                                    <action selector="onClickTabBar:" destination="WA2-KI-qB5" eventType="touchUpInside" id="vps-Ha-Nad"/>
                                                 </connections>
                                             </button>
                                         </subviews>

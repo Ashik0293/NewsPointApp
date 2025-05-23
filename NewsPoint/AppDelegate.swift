@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var backgroundFetchTimer: Timer?
     let newsRefreshIdentifier = "com.NewsPoint.newsRefresh"
-    let minimumRefreshInterval: TimeInterval = 10
+    let minimumRefreshInterval: TimeInterval = 30 * 60
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         registerBackgroundTasks()
@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     //MARK: Google SignIN Setup
-    
     func application(_ app: UIApplication,
                          open url: URL,
                          options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
@@ -85,7 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - News Fetching
-    
     private func fetchLatestNews(completion: @escaping (Bool) -> Void) {
         let apiService = APIService()
         apiService.fetchNews { result in
@@ -145,7 +143,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - Core Data Stack
-    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "NewsPointEntity")
         container.loadPersistentStores { (description, error) in

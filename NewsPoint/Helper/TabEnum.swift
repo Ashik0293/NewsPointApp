@@ -10,13 +10,15 @@ import UIKit
 
 enum TabEnum: Int {
     case home = 0, search, profile
-        
-    var imageView: UIImageView? {
-        let vc = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
+    
+    var color: UIColor {
         switch self {
-        case .home: return vc?.homeImage
-        case .search: return vc?.searchImage
-        case .profile: return vc?.personImage
+        case .home:
+            return .red
+        case .search:
+            return .systemGreen
+        case .profile:
+            return .systemPurple
         }
     }
     
